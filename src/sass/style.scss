@@ -1,0 +1,62 @@
+
+
+@import 'libs/bootstrap-reboot.min';
+
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+body {
+    padding: 20px;
+}
+
+.calc {
+    &-body {
+
+    }
+    &-top {
+        input {
+            
+        }
+    }
+    #calc-storage { // input st
+
+    }
+    #calc-transfer { // input tr
+
+    }
+    #price-calc { // form
+
+    }
+    .calc-res {
+        &_storage {
+            span {
+
+            }
+        }
+        &_transfer {
+            span {
+                
+            }
+        }
+    }
+    .price-calc { // outpud
+
+    }
+
+}
+.pricing-bar {
+   
+    &__num { // просто число
+
+    }
+}
+.pricing-bar__value { // изменяется
+    height: 25px;
+    background-color: rgb(53, 116, 218);
+    width: 40px;
+    display: flex;
+    margin-bottom: 10px;
+}
+@import 'blocks/header';
