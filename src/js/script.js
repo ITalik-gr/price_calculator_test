@@ -15,102 +15,114 @@ let calcStorage = document.querySelector('#calc-storage'), // input
     calcPriceScaleway = document.querySelector('.scaleway-bar__value'), // стовпчик
     calcScalewayResNumber = document.querySelector('.scaleway-bar__num span'), // ціна номером
     radioScalewayInputs = document.querySelectorAll('.scaleway-check[name="scaleway-checked"]');
+  //? 4 провайдер
+    calcPriceVultr = document.querySelector('.vultr-bar__value'), // стовпчик
+    calcVultrResNumber = document.querySelector('.vultr-bar__num span'), // ціна номером
 
-//input[name="input_name"]
 
-reCalcAll();
-    calcStorage.addEventListener('input', () => {
+reCalcAll(); 
+
+    function calcResultBackblazeBar(minPrice, stPrice, trPrice,) { // 1
+      let res = (calcStorage.value * stPrice) + (calcTransfer.value * trPrice);
+      ifMinimalPrice(res, minPrice, calcPriceBackblaze, calcBackblazeResNumber);
+    }
+
+    function calcResultBunnyBar(trPrice, maxPrice) { // 2 
+      let stPrice;
+      returnCheckInput(radioBunnyInputs);
+
+      if(inputCheckd == 0) {
+        stPrice = 0.01;
+      } else {
+        stPrice = 0.02;
+      }
+
+      let res = (calcStorage.value * stPrice) + (calcTransfer.value * trPrice);
+
+      if (res > maxPrice) {
+        calcPriceBunny.style.width = `${maxPrice * 4}px`;
+        calcBunnyResNumber.innerHTML = `${maxPrice}`;
+      } else {
+        // calcPriceBunny.style.width = `${res * 13}px`;
+        // calcBunnyResNumber.innerHTML = `${res.toFixed(2)}`;
+        calcBasic(res, calcPriceBunny, calcBunnyResNumber)
+      }
+    }
+
+    function calcResultScalewayBar() { // 3
+      let res;
+      let trPrice = 0.02;
+      returnCheckInput(radioScalewayInputs);
+      if (inputCheckd == 0) { // якщо обраний перший чек боксс то ціна така для sotage
+         storagePrice = 0.06;
+      } else {
+         storagePrice = 0.03;
+      }
+
+      if (calcStorage.value < 75) { 
+        storagePrice = 0
+        res = (calcStorage.value * storagePrice) + (calcTransfer.value * trPrice);
+      } else {
+        res = ((calcStorage.value - 75) * storagePrice) + ((calcTransfer.value - 75) * trPrice);
+      }
+
+      if (calcTransfer.value < 75) {
+        trPrice = 0
+        res = (calcStorage.value * storagePrice) + (calcTransfer.value * trPrice);
+      }  else {
+        res = ((calcStorage.value - 75) * storagePrice) + ((calcTransfer.value - 75) * trPrice);
+      }
+
+
+      
+      calcBasic(res, calcPriceScaleway, calcScalewayResNumber)
+      // calcPriceScaleway.style.width = `${res * 4}px`;
+      // calcScalewayResNumber.innerHTML = `${res.toFixed(2)}`;
+    }
+
+    function calcResultVultrBar(minPrice, stPrice, trPrice) { // 44
+      let res = (calcStorage.value * stPrice) + (calcTransfer.value * trPrice);
+      ifMinimalPrice(res, minPrice, calcPriceVultr, calcVultrResNumber);
+    }
+
+
+    function returnCheckInput(inputs) {
+      for (let elem in inputs) {  // який чекбокс чекнутий
+        if (inputs[elem].checked)
+        return inputCheckd = elem; // який обраний
+      }
+    }
+    function calcBasic(res, rowWidth, rowNum) {
+      rowWidth.style.width = `${res * 4}px`;
+      rowNum.innerHTML = `${res.toFixed(2)}`;
+    }
+    function ifMinimalPrice(res, minPrice, rowWidth, rowNum) {
+      if (res < minPrice) {
+        rowWidth.style.width = `${minPrice * 4}px`;
+        rowNum.innerHTML = `${minPrice}`;
+      } else {
+        calcBasic(res, rowWidth, rowNum)
+      }
+    }
+    function reCalcAll() {
+      calcResultBackblazeBar(7, 0.005, 0.01)
+      calcResultBunnyBar(0.01, 10)
+      calcResultScalewayBar()
+      calcResultVultrBar(5, 0.01, 0.01)
+    }
+
+
+    calcStorage.addEventListener('input', () => { // перераховувать і записувать скіки вибрано
       calcResStorage.innerHTML = `${calcStorage.value}`;
+      reCalcAll()
     });
-    calcTransfer.addEventListener('input', () => {
+    calcTransfer.addEventListener('input', () => {  // перераховувать і записувать скіки вибрано
       calcResTransfer.innerHTML = `${calcTransfer.value}`;
+      reCalcAll()
     })
-    allRadio.forEach(e => {
+
+    allRadio.forEach(e => { // при клікі на будь яке радіо перераховувати все
       e.addEventListener('input', reCalcAll);
     })
 
-    function calcResultBackblazeBar() {
-      let minimumPrice = 7;
-      let storagePrice = 0.005;
-      let transferPrice = 0.01;
-      let res = (calcStorage.value * storagePrice) + (calcTransfer.value * transferPrice);
-      if (res < minimumPrice) {
-        calcPriceBackblaze.style.width = `${minimumPrice * 13}px`;
-        calcBackblazeResNumber.innerHTML = `${minimumPrice}`;
-      } else {
-        calcPriceBackblaze.style.width = `${res * 13}px`;
-        calcBackblazeResNumber.innerHTML = `${res.toFixed(2)}`;
-      }
-    }
-    function calcResultBunnyBar() {
-      let maxPrice = 10;
-      let storagePrice;
-      let transferPrice = 0.01;
-
-      for (let elem in radioBunnyInputs) {
-        if (radioBunnyInputs[elem].checked)
-        inputCheckd = elem; // який обраний
-      }
-      if(inputCheckd == 0) {
-        storagePrice = 0.01;
-      } else {
-        storagePrice = 0.02;
-      }
-
-      let res = (calcStorage.value * storagePrice) + (calcTransfer.value * transferPrice);
-      if (res > maxPrice) {
-        calcPriceBunny.style.width = `${maxPrice * 13}px`;
-        calcBunnyResNumber.innerHTML = `${maxPrice}`;
-      } else {
-        calcPriceBunny.style.width = `${res * 13}px`;
-        calcBunnyResNumber.innerHTML = `${res.toFixed(2)}`;
-      }
-    }
-    function calcResultScalewayBar() {
-      // let maxPrice = 10;
-      // let storagePrice = 0.02;
-      let transferPrice = 0.02;
-      let res;
-
-      for (let elem in radioScalewayInputs) {
-        if (radioScalewayInputs[elem].checked)
-        inputCheckd = elem; // який обраний
-      }
-
-      if (calcStorage.value < 75) {
-        storagePrice = 0
-        res = (calcStorage.value * storagePrice) + (calcTransfer.value * transferPrice);
-      } else {
-        
-        if(inputCheckd == 0) {
-          storagePrice = 0.06;
-        } else {
-          storagePrice = 0.03;
-        }
-        res = ((calcStorage.value - 75) * storagePrice) + ((calcTransfer.value - 75) * transferPrice);
-      }
-      if (calcTransfer.value < 75) {
-        transferPrice = 0
-        res = (calcStorage.value * storagePrice) + (calcTransfer.value * transferPrice);
-      } else {
-        res = ((calcStorage.value - 75) * storagePrice) + ((calcTransfer.value - 75) * transferPrice);
-      }
-      calcPriceScaleway.style.width = `${res * 13}px`;
-      calcScalewayResNumber.innerHTML = `${res.toFixed(2)}`;
-    }
-
-
-    function reCalcAll() {
-      calcResultBackblazeBar()
-      calcResultBunnyBar()
-      calcResultScalewayBar()
-    }
-
-
-    calcStorage.addEventListener('input', () => {
-      reCalcAll()
-    });
-    calcTransfer.addEventListener('input', () => {
-      reCalcAll()
-    })
     

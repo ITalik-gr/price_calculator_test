@@ -86,46 +86,74 @@
        
         <form id="price-calc" class="calc-top">
             <span>
-                <div class="calc-res calc-res_storage">Storage: <span>200</span></div>
-                <input min="0" max="1000" value="200" type="range" name="calc-storage" id="calc-storage">
+                <div class="calc-res calc-res_storage">Storage: <span>200</span> GB</div>
+                <div class="price-card__rate_wrap">
+                  <input min="0" max="1000" value="200" type="range" name="calc-storage" id="calc-storage">
+                  </div>
             </span>
             <span>
-                <div class="calc-res calc-res_transfer">Transfer: <span>200</span></div>
-                <input min="0" max="1000" value="200" type="range" name="calc-transfer" id="calc-transfer">
+                <div class="calc-res calc-res_transfer">Transfer: <span>200</span> GB</div>
+                <div class="price-card__rate_wrap">
+                  <input min="0" max="1000" value="200" type="range" name="calc-transfer" id="calc-transfer">
+                </div>
             </span>
 
 
         </form>
         <div class="calc-body">
+
                 <span class="pricing-bar backblaze-bar">
+                  <div class="pricing-bar__info">
+                    <div class="pricing-bar__name">
+                      backblaze.com
+                    </div>
+                  </div>
+                  <div class="pricing-bar__row">
                     <div class="pricing-bar__value backblaze-bar__value">
                     </div>
                     <div class="pricing-bar__num backblaze-bar__num">
                         <span>7</span>$
                     </div>
+                  </div>
+
                 </span>
 
                 <span class="pricing-bar bunny-bar">
-                    <div class="bunny-checkeds">
-                            <label for="bunny-checked"> 
-                                <input class="bunny-check" checked required type="radio" value="HDD" name="bunny-checked" id="bunny-checked_1">
-                                HDD
-                            </label>
-                            <label for="bunny-checked">
-                                <input class="bunny-check" required type="radio" value="SSD" name="bunny-checked" id="bunny-checked_2">
-                                SSD
-                            </label>
+                    <div class="pricing-bar__info">
+
+                      <div class="pricing-bar__name">
+                        bunny.net
+                      </div>
+
+                      <div class="bunny-checkeds pricing-bar__ckeckeds">
+                        <label for="bunny-checked"> 
+                            <input class="bunny-check" checked required type="radio" value="HDD" name="bunny-checked" id="bunny-checked_1">
+                            HDD
+                        </label>
+                        <label for="bunny-checked">
+                            <input class="bunny-check" required type="radio" value="SSD" name="bunny-checked" id="bunny-checked_2">
+                            SSD
+                        </label>
                     </div>
-                    <div class="pricing-bar__value bunny-bar__value">
                     </div>
-                    <div class="pricing-bar__num bunny-bar__num">
-                        <span>1</span>$
+                    <div class="pricing-bar__row">
+                      <div class="pricing-bar__value bunny-bar__value">
+                      </div>
+                      <div class="pricing-bar__num bunny-bar__num">
+                          <span>1</span>$
+                      </div>
                     </div>
+
                 </span>
 
                 <span class="pricing-bar scaleway-bar">
 
-                    <div class="scaleway-checkeds">
+                    <div class="pricing-bar__info">
+
+                      <div class="pricing-bar__name">
+                        scaleway.com
+                      </div>
+                      <div class="scaleway-checkeds pricing-bar__ckeckeds">
                         <label for="scaleway-checked"> 
                             <input class="scaleway-check" checked required type="radio" value="Multi" name="scaleway-checked" id="scaleway-checked_1">
                             Multi
@@ -135,14 +163,33 @@
                             Single
                         </label>
                     </div>
-
-                    <div class="pricing-bar__value scaleway-bar__value">
-
                     </div>
-                    <div class="pricing-bar__num scaleway-bar__num">
-                        <span>1</span>$
+                    <div class="pricing-bar__row">
+                      <div class="pricing-bar__value scaleway-bar__value">
+                      </div>
+                      <div class="pricing-bar__num scaleway-bar__num">
+                          <span>1</span>$
+                      </div>
                     </div>
+
                 </span>
+
+                <span class="pricing-bar vultr-bar">
+                  <div class="pricing-bar__info">
+                    <div class="pricing-bar__name">
+                      vultr.com
+                    </div>
+                  </div>
+
+                  <div class="pricing-bar__row">
+                    <div class="pricing-bar__value vultr-bar__value">
+                    </div>
+                    <div class="pricing-bar__num vultr-bar__num">
+                        <span>7</span>$
+                    </div>
+                  </div>
+
+              </span>
         </div>
     </div>
 
